@@ -1,4 +1,5 @@
 defmodule FoodVotingWeb.Router do
+  alias FoodVotingWeb.HomeLive
   use FoodVotingWeb, :router
 
   pipeline :browser do
@@ -14,10 +15,10 @@ defmodule FoodVotingWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", FoodVotingWeb do
+  scope "/" do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", FoodVotingWeb.HomeLive, :home
   end
 
   # Other scopes may use custom stacks.
