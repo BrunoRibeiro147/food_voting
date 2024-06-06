@@ -35,8 +35,6 @@ defmodule FoodVoting.AI.OpenAI do
 
     body = %{role: "user", content: String.replace(template_message, "{message}", message)}
 
-    IO.inspect(body)
-
     case post("/threads/" <> @thread_id <> "/messages", body) do
       {:ok, %Tesla.Env{status: 200}} ->
         :ok
