@@ -4,7 +4,7 @@ defmodule FoodVoting.Repo.Migrations.AddShareableLinksTable do
   def change do
     create table(:shareable_links) do
       add :hash, :string
-      add :selected_options, :jsonb, default: "[]"
+      add :selected_food_trucks, :string
 
       timestamps()
     end
