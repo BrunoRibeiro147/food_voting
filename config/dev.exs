@@ -80,3 +80,8 @@ config :phoenix_live_view, :debug_heex_annotations, true
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+config FoodVoting.AI.OpenAI,
+  api_key: System.get_env("OPENAI_TOKEN"),
+  thread_id: System.get_env("THREAD_ID"),
+  assistant_id: System.get_env("ASSISTANT_ID")
