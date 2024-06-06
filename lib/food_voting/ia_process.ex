@@ -16,7 +16,7 @@ defmodule FoodVoting.IAProcess do
   @impl true
   def handle_cast({:send, message}, state) do
     OpenAI.send_message(message)
-    {:ok, run_id} = OpenAi.create_run()
+    {:ok, run_id} = OpenAI.create_run()
 
     {:noreply, Map.put(state, :schedule, schedule_work(state.interval, run_id))}
   end
@@ -28,10 +28,6 @@ defmodule FoodVoting.IAProcess do
     case response["status"] do
       "completed" ->
         send(self(), :pooling_done)
-        {:noreply, state}
-
-      "requires_action" ->
-        send(self(), {:apply_actions, response})
         {:noreply, state}
 
       _value ->
@@ -46,29 +42,6 @@ defmodule FoodVoting.IAProcess do
     IO.inspect(assistant_response)
 
     {:noreply, state}
-  end
-
-  @impl true
-  def handle_info({:apply_actions, run}, state) do
-    IO.inspect(run, label: "APPLY ACTIONS")
-    actions = run["required_action"]["submit_tool_outputs"]["tool_calls"]
-
-    tool_outputs =
-      Enum.map(actions, fn action ->
-        case action["function"]["name"] do
-          "list_appointments" ->
-            %{
-              tool_call_id: action["id"],
-              output: "Request Server"
-            }
-        end
-      end)
-
-    IO.inspect(tool_outputs, label: "TOOL OUTPUTS")
-
-    OpenAI.submit_functions_output(run["id"], tool_outputs)
-
-    {:noreply, Map.put(state, :schedule, schedule_work(state.interval, run["id"]))}
   end
 
   defp schedule_work(interval, run_id) when is_integer(interval) and interval > 0,
