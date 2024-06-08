@@ -10,7 +10,7 @@ defmodule FoodVoting.IAProcess do
       |> Map.put_new(:interval, 2_000)
       |> Map.put_new(:schedule, nil)
 
-    {:ok, state}
+    {:ok, state, 10_000}
   end
 
   @impl true
@@ -39,9 +39,18 @@ defmodule FoodVoting.IAProcess do
   def handle_info(:pooling_done, state) do
     {:ok, assistant_response} = OpenAI.get_assistant_response()
 
-    IO.inspect(assistant_response)
+    Phoenix.PubSub.broadcast(
+      FoodVoting.PubSub,
+      state.topic,
+      {:food_trucks_options, assistant_response}
+    )
 
     {:noreply, state}
+  end
+
+  @impl true
+  def handle_info(:timeout, state) do
+    {:stop, "finished", state}
   end
 
   defp schedule_work(interval, run_id) when is_integer(interval) and interval > 0,

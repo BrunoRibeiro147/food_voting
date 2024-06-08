@@ -84,7 +84,7 @@ defmodule FoodVoting.AI.OpenAI do
   def get_assistant_response() do
     case get("/threads/" <> @thread_id <> "/messages") do
       {:ok, %Tesla.Env{status: 200, body: response}} ->
-        {:ok, build_assistant_response_data(response)}
+        build_assistant_response_data(response)
 
       {:ok, %Tesla.Env{status: status, body: body}} ->
         Logger.error(%{status: status, body: body})
@@ -118,6 +118,8 @@ defmodule FoodVoting.AI.OpenAI do
       |> List.first()
       |> Map.get("text")
       |> Map.get("value")
+      |> Jason.decode!()
+      |> Map.get("restaurants")
 
     {:ok, assistant_message}
   end
