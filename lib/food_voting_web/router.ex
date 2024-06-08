@@ -1,5 +1,4 @@
 defmodule FoodVotingWeb.Router do
-  alias FoodVotingWeb.HomeLive
   use FoodVotingWeb, :router
 
   pipeline :browser do
@@ -19,6 +18,10 @@ defmodule FoodVotingWeb.Router do
     pipe_through :browser
 
     live "/", FoodVotingWeb.HomeLive, :home
+    live "/rooms/:hash", FoodVotingWeb.VotingRoomLive, :voting_room
+    live "/rooms/:hash/open_voting", FoodVotingWeb.OpenVotingRoomLive, :voting_room_open
+    live "/rooms/:hash/finished", FoodVotingWeb.VotingRoomFinishedLive, :voting_room_finished
+    live "/404", FoodVotingWeb.NotFoundLive, :not_found
   end
 
   # Other scopes may use custom stacks.
