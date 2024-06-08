@@ -14,10 +14,21 @@ When all participants finish voting the application is going to return the most 
 
 <img width="701" alt="Finished Voting Room Page" src="https://github.com/BrunoRibeiro147/food_voting/assets/43683632/566fc345-f3a3-4a63-ad3d-ad2482902c99">
 
-To start your Phoenix server:
+## To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
   * Run `source .env` to evaluate the enviroment variables
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Technologies Used
+
+- Phoenix
+- Phoenix LiveView
+- Phoenix PubSub
+- Phoenix Presence
+- Elixir
+- Postgres
+- GenServers (OTP)
+- Tesla (HTTP Client)
