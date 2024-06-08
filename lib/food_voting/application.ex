@@ -12,6 +12,7 @@ defmodule FoodVoting.Application do
       FoodVoting.Repo,
       {DNSCluster, query: Application.get_env(:food_voting, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: FoodVoting.PubSub},
+      FoodVotingWeb.Presence,
       # Start the Finch HTTP client for sending emails
       {Finch, name: FoodVoting.Finch},
       # Start a worker by calling: FoodVoting.Worker.start_link(arg)
