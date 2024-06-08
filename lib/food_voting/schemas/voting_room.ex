@@ -3,12 +3,14 @@ defmodule FoodVoting.Schemas.ShareableLinks do
   use FoodVoting.Schema
 
   @required_fields ~w(hash)a
-  @optional_fields ~w(selected_food_trucks selected_options)a
+  @optional_fields ~w(selected_food_trucks selected_options voting_status most_voted_food_truck)a
 
-  schema "shareable_links" do
+  schema "voting_room" do
     field :hash, :string
     field :selected_food_trucks, :string
     field :selected_options, {:array, :map}, virtual: true
+    field :voting_status, Ecto.Enum, values: [:closed, :open, :finished]
+    field :most_voted_food_truck, :string
 
     timestamps()
   end
@@ -22,11 +24,12 @@ defmodule FoodVoting.Schemas.ShareableLinks do
   end
 
   defp encode_params(changeset) do
-    selected_options =
-      changeset
-      |> get_change(:selected_options)
-      |> Jason.encode!()
+    case get_change(changeset, :selected_options) do
+      nil ->
+        changeset
 
-    put_change(changeset, :selected_food_trucks, selected_options)
+      selected_options ->
+        put_change(changeset, :selected_food_trucks, Jason.encode!(selected_options))
+    end
   end
 end
