@@ -31,3 +31,8 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :food_voting, FoodVoting.AI.OpenAI,
+  api_key: "API_KEY",
+  thread_id: "THREAD_ID",
+  assistant_id: "ASSISTANT_ID"
