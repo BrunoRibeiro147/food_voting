@@ -20,10 +20,15 @@ When all participants finish voting the application is going to return the most 
   * Add a `.env` file on the root of the application, following the .env-sample
   * Run `source .env` to evaluate the enviroment variables
   * Enter on the assets folder `cd assets` and run the following command: `npm install` to install the flowbyte library
+  * Go back to the root of the application `cd ..`
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Problems
+
+  * If you had variables problems when reestating the application, just run the `source .env` command again
 
 ## Technologies Used
 
