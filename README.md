@@ -16,6 +16,7 @@ When all participants finish voting the application is going to return the most 
 
 ## To start your Phoenix server:
 
+  * Run the command `docker compose up -d` to initialize the database, (you need to have docker installed for this)
   * Run `mix setup` to install and setup dependencies
   * Enter on the assets folder `cd assets` and run the following command: `npm install` to install the flowbyte library
   * Add a `.env` file on the root of the application, following the .env-sample
