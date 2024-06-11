@@ -19,8 +19,8 @@ When all participants finish voting the application is going to return the most 
   * Run the command `docker compose up -d` to initialize the database, (you need to have docker installed for this)
   * Add a `.env` file on the root of the application, following the .env-sample
   * Run `source .env` to evaluate the enviroment variables
-  * Run `mix setup` to install and setup dependencies
   * Enter on the assets folder `cd assets` and run the following command: `npm install` to install the flowbyte library
+  * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
