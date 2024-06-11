@@ -17,6 +17,8 @@ When all participants finish voting the application is going to return the most 
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
+  * Enter on the assets folder `cd assets` and run the following command: `npm install` to install the flowbyte library
+  * Add a .env file on the root of the application, following the .env-sample
   * Run `source .env` to evaluate the enviroment variables
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 

@@ -10,8 +10,8 @@ defmodule FoodVoting.AI.OpenAI do
   plug Tesla.Middleware.Headers, [{"OpenAI-Beta", "assistants=v2"}]
   plug Tesla.Middleware.JSON
 
-  @thread_id Application.fetch_env!(:food_voting, __MODULE__)[:thread_id]
-  @assistant_id Application.fetch_env!(:food_voting, __MODULE__)[:assistant_id]
+  @thread_id Application.compile_env!(:food_voting, __MODULE__)[:thread_id]
+  @assistant_id Application.compile_env!(:food_voting, __MODULE__)[:assistant_id]
 
   def send_message(message) do
     template_message = """
